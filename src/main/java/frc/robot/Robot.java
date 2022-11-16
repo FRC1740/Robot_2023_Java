@@ -6,11 +6,13 @@ package frc.robot;
 
 //import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import edu.wpi.first.wpilibj.Relay;
 
 /**
  * This is a demo program showing the use of the DifferentialDrive class. Runs the motors with
@@ -26,7 +28,8 @@ public class Robot extends TimedRobot {
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
   // private final Joystick m_stick = new Joystick(0);
   private final XboxController m_driver = new XboxController(0);
-
+  private final XboxController m_codriver = new XboxController(1);
+  private final Relay m_relay = new Relay(0);
 
   @Override
   public void robotInit() {
@@ -46,5 +49,11 @@ public class Robot extends TimedRobot {
     // m_robotDrive.arcadeDrive(-m_stick.getY(), m_stick.getX());
     // "Mario Cart" Drive Mode
     m_robotDrive.arcadeDrive(m_driver.getLeftTriggerAxis() - m_driver.getRightTriggerAxis(), -m_driver.getRightX(), true);
+
+    if (m_codriver.getAButton()) {
+      m_relay.set(Relay.Value.kForward);
+    } else {
+      m_relay.set(Relay.Value.kOff);
+    }
   }
 }
