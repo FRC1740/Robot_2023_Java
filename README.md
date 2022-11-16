@@ -1,6 +1,6 @@
 # Robot_2023_Java
-## Basic Java Robot for Testing
 This code was built using the 2023 beta version of WPILib
+## Basic Java Robot for Testing
 
 TODO:
 1. Compile-time ID
