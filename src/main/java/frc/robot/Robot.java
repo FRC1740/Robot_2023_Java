@@ -17,11 +17,11 @@ import com.revrobotics.CANSparkMaxLowLevel;
  * arcade steering.
  */
 public class Robot extends TimedRobot {
-  private final CANSparkMax m_leftMotor = new CANSparkMax(3, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private final CANSparkMax m_rightMotor = new CANSparkMax(2, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private final CANSparkMax m_leftMotorb = new CANSparkMax(5, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private final CANSparkMax m_rightMotorb = new CANSparkMax(4, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
+  private final CANSparkMax m_leftMotorLeader = new CANSparkMax(3, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private final CANSparkMax m_rightMotorLeader = new CANSparkMax(2, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private final CANSparkMax m_leftMotorFollower = new CANSparkMax(5, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private final CANSparkMax m_rightMotorFollower = new CANSparkMax(4, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftMotorLeader, m_rightMotorLeader);
   private final XboxController m_driver = new XboxController(0);
   private final XboxController m_codriver = new XboxController(1);
   private final Relay m_relay = new Relay(0);
@@ -32,8 +32,8 @@ public class Robot extends TimedRobot {
     // result in both sides moving forward. Depending on how your robot's
     // gearbox is constructed, you might have to invert the left side instead.
     // m_rightMotor.setInverted(true);
-    m_leftMotorb.follow(m_leftMotor);
-    m_rightMotorb.follow(m_rightMotor);
+    m_leftMotorFollower.follow(m_leftMotorLeader);
+    m_rightMotorFollower.follow(m_rightMotorLeader);
   }
 
   @Override
